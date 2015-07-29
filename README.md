@@ -6,8 +6,11 @@ ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise patte
 var Promise = require("ES5Promise");
 
 new Promise(function (resolve, reject) {
+    resolve("foobar!");
 }).then(function (value) {
+    console.log(value);
 }, function (reason) {
+    console.log(reason.message);
 });
 ```
 
