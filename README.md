@@ -49,3 +49,7 @@ new Promise(function (resolve, reject) {
     console.log(reason.message);
 });
 ```
+or
+```bash
+$ npm run example
+```
