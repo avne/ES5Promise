@@ -12,7 +12,7 @@ $ npm install git+https://git@github.com/avne/ES5Promise.git
 ```
 Once the installation is done, you can require ES5Promise inside your scripts to use it. 
 ```js
-var Promise = require("");
+var Promise = require("ES5Promise");
 ```
 
 Testing
