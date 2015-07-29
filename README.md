@@ -24,10 +24,7 @@ new Promise(function (resolve, reject) {
     request = http.request({
         "host": "jsonplaceholder.typicode.com",
         "path": "posts/1",
-        "method": "get",
-        "headers": {
-            "Content-Type": "application/json"
-        }
+        "method": "get"
     }, function(response) {
         response.setEncoding("utf-8");
 
@@ -52,4 +49,22 @@ new Promise(function (resolve, reject) {
 or
 ```bash
 $ npm run example
+```
+### FireFox, Chrome, Safari, Opera, Internet Explorer
+```js
+var http = require('http'),
+    Promise = require("ES5Promise");
+
+new Promise(function (resolve, reject) {
+    var request = new XMLHttpRequest();
+
+    request.open("GET", "http://jsonplaceholder.typicode.com/posts/1", true);
+    request.onload = resolve;
+    request.onerror = reject;
+    request.send();
+}).then(function (data) {
+    console.log(data);
+}, function (reason) {
+    console.log(reason.message);
+});
 ```
