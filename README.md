@@ -4,14 +4,14 @@ ES5Promise
 ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.
   
 ```js
-var https = require('http'),
+var http = require('http'),
     Promise = require("ES5Promise");
 
 new Promise(function (resolve, reject) {
     var request,
         data = "";
 
-    request = https.request({
+    request = http.request({
         "host": "jsonplaceholder.typicode.com",
         "path": "posts/1",
         "method": "get",
