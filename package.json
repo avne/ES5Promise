@@ -1,0 +1,22 @@
+{
+  "name": "ES5Promise",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "mocha ./test/**"
+  },
+  "dependencies": {},
+  "description": "EcmaScript 5 compatible implementation of the EcmaScript 2015 (Harmony) Promise pattern",
+  "main": "src/Promise.js",
+  "keywords": [
+    "ES5",
+    "EcmaScript5",
+    "Asynchronious",
+    "Promise"
+  ],
+  "author": "André Neumann",
+  "license": "LGPL",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  }
+}
