@@ -68,7 +68,7 @@ or use the npm `example` script to run the example
 $ npm run example
 ```
 
-### FireFox, Chrome, Safari, Opera, Internet Explorer
+### FireFox, Chrome, Safari, Opera and Internet Explorer 7+
 ```js
 new Promise(function (resolve, reject) {
     var request = new XMLHttpRequest();
