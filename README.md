@@ -17,11 +17,11 @@ var Promise = require("");
 
 Testing
 -------
-Type the following into your terminal to install all dependencies that are required for testing:
+To test the module, type the following into a terminal to install all dependencies that are required for testing.
 ```bash
-$ npm test
+$ npm install
 ```
-Once this is done type the following to start the test suite:
+Once this is done use the `test` to start the test suite.
 ```bash
 $ npm test
 ```
@@ -62,7 +62,7 @@ new Promise(function (resolve, reject) {
     console.log(reason.message);
 });
 ```
-or
+or use the npm `example` script to run the example
 ```bash
 $ npm run example
 ```
