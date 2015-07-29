@@ -28,6 +28,7 @@ $ npm test
 
 Examples
 --------
+
 ### node.js and io.js
 ```js
 var http = require("http"),
@@ -66,11 +67,9 @@ or use the npm `example` script to run the example
 ```bash
 $ npm run example
 ```
+
 ### FireFox, Chrome, Safari, Opera, Internet Explorer
 ```js
-var http = require('http'),
-    Promise = require("ES5Promise");
-
 new Promise(function (resolve, reject) {
     var request = new XMLHttpRequest();
 
