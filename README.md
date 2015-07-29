@@ -10,7 +10,7 @@ Use npm to install ES5Promise to your dependencies folder.
 ```bash
 $ npm install git+https://git@github.com/avne/ES5Promise.git
 ```
-Once the installation is done, simply require ES5Promise inside your scripts to use it. 
+Once the installation is done, you can require ES5Promise inside your scripts to use it. 
 ```js
 var Promise = require("");
 ```
