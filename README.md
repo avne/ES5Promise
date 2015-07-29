@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/avne/ES5Promise.svg?branch=master)](http://travis-ci.org/avne/ES5Promise)
 
 ES5Promise
 ==========
+[![Build Status](https://travis-ci.org/avne/ES5Promise.svg?branch=master)](http://travis-ci.org/avne/ES5Promise)
 ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.
 
 Installation
@@ -68,7 +68,7 @@ or use the npm `example` script to run the example
 $ npm run example
 ```
 
-### FireFox, Chrome, Safari, Opera and Internet Explorer 7+
+### FireFox, Chrome, Safari, Opera and Internet Explorer 9+
 ```js
 new Promise(function (resolve, reject) {
     var request = new XMLHttpRequest();
