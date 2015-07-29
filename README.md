@@ -6,7 +6,7 @@ ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise patte
 
 Installation
 ------------
-Use npm to install ES5Promise to your dependencies folder.
+Use `npm` to install ES5Promise to your dependencies folder.
 ```bash
 $ npm install git+https://git@github.com/avne/ES5Promise.git
 ```
