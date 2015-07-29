@@ -7,7 +7,6 @@ ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise patte
 var https = require('http'),
     Promise = require("ES5Promise");
 
-console.log("one");
 new Promise(function (resolve, reject) {
     var request,
         data = "";
