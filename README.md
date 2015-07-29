@@ -30,7 +30,7 @@ Examples
 --------
 ### node.js and io.js
 ```js
-var http = require('http'),
+var http = require("http"),
     Promise = require("ES5Promise");
 
 new Promise(function (resolve, reject) {
