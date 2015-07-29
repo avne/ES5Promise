@@ -21,7 +21,7 @@ To test the module, type the following into a terminal to install all dependenci
 ```bash
 $ npm install
 ```
-Once this is done use the `test` to start the test suite.
+Once this is done use the `test` npm script to start the test suite.
 ```bash
 $ npm test
 ```
