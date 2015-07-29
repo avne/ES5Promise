@@ -4,12 +4,38 @@ ES5Promise
 ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.
   
 ```js
-var Promise = require("ES5Promise");
+var https = require('http'),
+    Promise = require("ES5Promise");
 
+console.log("one");
 new Promise(function (resolve, reject) {
-    resolve("foobar!");
-}).then(function (value) {
-    console.log(value);
+    var request,
+        data = "";
+
+    request = https.request({
+        "host": "jsonplaceholder.typicode.com",
+        "path": "posts/1",
+        "method": "get",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }, function(response) {
+        response.setEncoding("utf-8");
+
+        response.on("data", function(chunk) {
+            data += chunk;
+        });
+        
+        response.on("end", function() {
+            resolve(data);
+        });
+        
+        response.on("error", function(error) {
+            reject(error);
+        });
+    });
+}).then(function (data) {
+    console.log(data);
 }, function (reason) {
     console.log(reason.message);
 });
