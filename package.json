@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "homepage": "https://github.com/avne/ES5Promise",
   "bugs": {
-    "url" : "https://github.com/avne/ES5Promise/issues"
+    "url": "https://github.com/avne/ES5Promise/issues"
   },
-  "description": "EcmaScript 5 compatible implementation of the EcmaScript 2015 (Harmony) Promise pattern",
+  "description": "ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.",
   "keywords": [
     "ES5",
     "EcmaScript5",
@@ -20,14 +20,15 @@
   },
   "scripts": {
     "test": "mocha ./test",
-    "example": "node ./src/example/jsonplaceholder.js"
+    "example": "node ./example/jsonplaceholder.js"
   },
   "main": "src/Promise.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/npm/npm.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avne/ES5Promise.git"
   },
   "devDependencies": {
+    "bower": "^1.4.1",
     "chai": "^3.2.0",
     "mocha": "^2.2.5"
   }
