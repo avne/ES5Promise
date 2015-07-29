@@ -1,3 +1,6 @@
+# Git files
+.gitignore
+
 # Dependency directory
 node_modules
 
