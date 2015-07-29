@@ -10,8 +10,8 @@ Installation
 $ npm install git+https://git@github.com/avne/ES5Promise.git
 ```
 
-Example
--------
+Examples
+--------
 ### node.js and io.js
 ```js
 var http = require('http'),
