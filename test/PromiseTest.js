@@ -5,28 +5,26 @@ var expect = require("chai").expect,
     Promise = require("../src/Promise.js");
 
 describe("ES5Promise", function () {
-    var notAFunctionError = new TypeError("Not a function!");
-
     describe("constructor", function () {
         it("should fail without arguments", function () {
             expect(function () {new Promise(); }).to.throw(TypeError, /Not enough arguments!/);
         });
 
         it("should fail, if called with anything else than a function", function () {
-            expect(function () {new Promise({}); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Object()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise([]); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Array()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(""); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new String()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(0); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Number()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(true); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Boolean()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(/regExp/); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new RegExp()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Date()); }).to.throw(notAFunctionError);
-            expect(function () {new Promise(new Error()); }).to.throw(notAFunctionError);
+            expect(function () {new Promise({}); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Object()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise([]); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Array()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(""); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new String()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(0); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Number()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(true); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Boolean()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(/regExp/); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new RegExp()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Date()); }).to.throw(TypeError, /Not a function!/);
+            expect(function () {new Promise(new Error()); }).to.throw(TypeError, /Not a function!/);
         });
 
         it("should construct an instance of Promise", function () {
@@ -216,19 +214,19 @@ describe("ES5Promise", function () {
             it("should fail, if called with anything else than a function", function () {
                 var promise = Promise.resolve("foobar");
 
-                expect(function () {promise.then({}); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new Object()); }).to.throw(notAFunctionError);
-                expect(function () {promise.then([]); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new Array()); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(""); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new String("")); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(0); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new Number(0)); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(true); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new Boolean(true)); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(/regExp/); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new RegExp()); }).to.throw(notAFunctionError);
-                expect(function () {promise.then(new Date()); }).to.throw(notAFunctionError);
+                expect(function () {promise.then({}); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new Object()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then([]); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new Array()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(""); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new String("")); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(0); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new Number(0)); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(true); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new Boolean(true)); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(/regExp/); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new RegExp()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.then(new Date()); }).to.throw(TypeError, /Not a function!/);
             });
         });
 
