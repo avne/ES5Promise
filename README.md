@@ -2,7 +2,7 @@
 ES5Promise
 ==========
 [![Build Status](https://travis-ci.org/avne/ES5Promise.svg?branch=master)](http://travis-ci.org/avne/ES5Promise)
-
+[![Coverage Status](https://coveralls.io/repos/avne/ES5Promise/badge.svg?branch=master&service=github)](https://coveralls.io/github/avne/ES5Promise?branch=master)
 ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.
 
 Installation
@@ -11,7 +11,7 @@ Use `npm` to install ES5Promise to your dependencies folder.
 ```bash
 $ npm install git+https://git@github.com/avne/ES5Promise.git
 ```
-Once the installation is done, you can require ES5Promise inside your scripts to use it. 
+Once the installation is done, you could require ES5Promise inside your scripts to use it. 
 ```js
 var Promise = require("ES5Promise");
 ```
