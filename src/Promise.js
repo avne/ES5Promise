@@ -2,6 +2,12 @@
  * @module ES5Promise
  */
 
+var Status = Object.freeze({
+        "PENDING": "pending",
+        "FULFILLED": "fulfilled",
+        "REJECTED": "rejected"
+    });
+
 function internalThen(fulfilled, rejected) {
     if (arguments.length == 0) {
         throw new TypeError("Not enough arguments!");
@@ -16,14 +22,14 @@ function internalThen(fulfilled, rejected) {
     }
 
     switch (this.status) {
-        case Promise.Status.PENDING:
+        case Status.PENDING:
             return new Promise(function (fulfill, reject) {
                 this.callbacks.fulfilled.push(function (value) {fulfilled(value); fulfill(value);});
                 this.callbacks.rejected.push(function (reason) {if (rejected) {rejected(reason); } reject(reason);});
             }.bind(this));
-        case Promise.Status.FULFILLED:
+        case Status.FULFILLED:
             return Promise.resolve(this.value);
-        case Promise.Status.REJECTED:
+        case Status.REJECTED:
             return Promise.reject(this.reason);
     }
 }
@@ -59,7 +65,7 @@ function callPromise(promise, fulfill, reject) {
  * @param {*} value
  */
 function internalFulfill(value) {
-    this.status = Promise.Status.FULFILLED;
+    this.status = Status.FULFILLED;
     this.value = value;
 }
 
@@ -68,7 +74,7 @@ function internalFulfill(value) {
  * @param {*} reason
  */
 function internalReject(reason) {
-    this.status = Promise.Status.REJECTED;
+    this.status = Status.REJECTED;
     this.reason = reason;
 }
 
@@ -96,21 +102,12 @@ function Promise(executor) {
                 "fulfilled": [],
                 "rejected": []
             },
-            "status": Promise.Status.PENDING,
+            "status": Status.PENDING,
             "value": null,
             "reason": null
         },
         timeout,
         interval;
-
-    Object.defineProperties(this, {
-        "status": {
-            "enumerable": true,
-            "get": function () {
-                return shared.status;
-            }
-        }
-    });
 
     /**
      * @param {Promise~fulfilled} fulfilled
@@ -134,11 +131,11 @@ function Promise(executor) {
 
     interval = setInterval(function () {
         switch (shared.status) {
-            case Promise.Status.PENDING:
+            case Status.PENDING:
                 return;
-            case Promise.Status.FULFILLED:
+            case Status.FULFILLED:
                 internalInform(shared.callbacks.fulfilled, shared.value); break;
-            case Promise.Status.REJECTED:
+            case Status.REJECTED:
                 internalInform(shared.callbacks.rejected, shared.reason); break;
         }
 
@@ -162,7 +159,7 @@ Promise.prototype = Object.create(Object.prototype);
  * @returns {Promise}
  */
 Promise.prototype.catch = function (rejected) {
-    if (!rejected) {
+    if (rejected == undefined) {
         throw new TypeError("Not enough arguments!");
     }
 
@@ -266,14 +263,5 @@ Promise.reject = function (reason) {
 Promise.resolve = function (value) {
     return Promise.prototype.isPrototypeOf(value) ? value : new Promise(function (resolve) {resolve(value); });
 };
-
-Object.defineProperty(Promise, "Status", {
-    "enumerable": "true",
-    "value": Object.freeze({
-        "PENDING": "pending",
-        "FULFILLED": "fulfilled",
-        "REJECTED": "rejected"
-    })
-});
 
 module.exports = Promise;
