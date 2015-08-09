@@ -32,31 +32,29 @@ Examples
 
 ### node.js and io.js
 ```js
-var http = require("http"),
+var http = require('http'),
     Promise = require("ES5Promise");
 
 new Promise(function (resolve, reject) {
-    var request,
-        data = "";
+    console.log("Calling jsonplaceholder REST API");
 
-    request = http.request({
-        "host": "jsonplaceholder.typicode.com",
-        "path": "posts/1",
-        "method": "get"
-    }, function(response) {
+    http.get("http://jsonplaceholder.typicode.com/posts/1", function(response) {
+        var data = "";
+
         response.setEncoding("utf-8");
 
         response.on("data", function(chunk) {
+            console.log("data chunk received: " + chunk);
             data += chunk;
         });
-        
+
         response.on("end", function() {
+            console.log("transfer finished");
             resolve(data);
         });
-        
-        response.on("error", function(error) {
-            reject(error);
-        });
+    }).on("error", function(error) {
+        console.error("An error occurred: " + error.message);
+        reject(error);
     });
 }).then(function (data) {
     console.log(data);
