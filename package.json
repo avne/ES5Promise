@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "ES5Promise",
   "version": "0.1.0",
   "homepage": "https://github.com/avne/ES5Promise",
@@ -9,7 +8,7 @@
   "description": "ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.",
   "keywords": [
     "ES5",
-    "EcmaScript5",
+    "ECMAScript5",
     "Asynchronious",
     "Promise"
   ],
