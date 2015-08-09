@@ -88,74 +88,48 @@ describe("ES5Promise", function () {
         });
     });
 
-    describe("static enum Promise.Status", function () {
+    describe("static reject()", function () {
         describe("accessibility", function () {
             it("should exist", function () {
-                expect(Promise.Status).to.exist;
+                expect(Promise.reject).to.exist;
             });
 
-            it("should be an object", function () {
-                expect(Promise.Status).to.be.an.object;
-            });
-        });
-
-        describe("value PENDING", function () {
-            it("should exist", function () {
-                expect(Promise.Status.PENDING).to.exist;
+            it("should be a function", function () {
+                expect(Promise.reject).to.be.a.function;
             });
 
-            it("should be an object", function () {
-                expect(Promise.Status.PENDING).to.be.a.string;
-            });
-
-            it("should equal 'pending'", function () {
-                expect(Promise.Status.PENDING).to.equal("pending");
-            });
-        });
-
-        describe("value FULFILLED", function () {
-            it("should exist", function () {
-                expect(Promise.Status.FULFILLED).to.exist;
-            });
-
-            it("should be an object", function () {
-                expect(Promise.Status.FULFILLED).to.be.a.string;
-            });
-
-            it("should equal 'pending'", function () {
-                expect(Promise.Status.FULFILLED).to.equal("fulfilled");
-            });
-        });
-
-        describe("value REJECTED", function () {
-            it("should exist", function () {
-                expect(Promise.Status.REJECTED).to.exist;
-            });
-
-            it("should be an object", function () {
-                expect(Promise.Status.REJECTED).to.be.a.string;
-            });
-
-            it("should equal 'pending'", function () {
-                expect(Promise.Status.REJECTED).to.equal("rejected");
-            });
-        });
-    });
-
-    describe("property status", function () {
-        describe("accessibility", function () {
-            it("should exist", function () {
-                expect((new Promise(function () {})).status).to.exist;
-            });
-
-            it("should be a string", function () {
-                expect((new Promise(function () {})).status).to.be.a.string;
+            it("should accept one arguments", function () {
+                expect(Promise.reject.length).to.equal(1);
             });
         });
 
         describe("behaviour", function () {
-            it("should be equal to Promise.Status.PENDING", function () {
-                expect((new Promise(function () {})).status).to.equal(Promise.Status.PENDING);
+            var promise = Promise.reject(new Error("foobar")),
+                timeout;
+
+            it("should return a promise", function () {
+                expect(promise).to.be.an.instanceOf(Promise);
+            });
+
+            it("should be rejected", function () {
+                var resolved = false,
+                    rejected = false,
+                    reason;
+
+                promise.then(function (value) {
+                    resolved = true;
+                    expect(value).to.equal("foobar")
+                }, function (error) {
+                    rejected = true;
+                    reason = error;
+                });
+
+                timeout = setTimeout(function () {
+                    expect(rejected).to.be.true;
+                    expect(resolved).to.be.false;
+                    expect(reason).to.be.instanceOf(Error);
+                    expect(reason.message).to.equal("foobar");
+                }, 1000);
             });
         });
     });
@@ -176,14 +150,28 @@ describe("ES5Promise", function () {
         });
 
         describe("behaviour", function () {
-            var promise = Promise.resolve("foobar");
+            var promise = Promise.resolve("foobar"),
+                timeout;
 
             it("should return a promise", function () {
                 expect(promise).to.be.an.instanceOf(Promise);
             });
 
-            it("should have a status equal to Promise.Status.FULFILLED", function () {
-                expect(promise.status).to.equal(Promise.Status.FULFILLED);
+            it("should be resolved", function () {
+                var resolved = false,
+                    rejected = false;
+
+                promise.then(function (value) {
+                    resolved = true;
+                    expect(value).to.equal("foobar")
+                }, function () {
+                    rejected = true;
+                });
+
+                timeout = setTimeout(function () {
+                    expect(resolved).to.be.true;
+                    expect(rejected).to.be.false;
+                }, 1000);
             });
         });
     });
@@ -211,7 +199,7 @@ describe("ES5Promise", function () {
                 expect(function () {new Promise(function () {}).then(); }).to.throw(TypeError, /Not enough arguments!/);
             });
 
-            it("should fail, if called with anything else than a function", function () {
+            it("should fail, if called with anything else then a function", function () {
                 var promise = Promise.resolve("foobar");
 
                 expect(function () {promise.then({}); }).to.throw(TypeError, /Not a function!/);
@@ -329,6 +317,81 @@ describe("ES5Promise", function () {
                     expect(rejectedCalled).to.be.true;
                     clearTimeout(timeout);
                 }, 1000);
+            });
+        });
+    });
+
+    describe("catch()", function () {
+        describe("accessibility", function () {
+            var promise;
+
+            it("should exist", function () {
+                promise = new Promise(function () {});
+                expect(promise.catch).to.exist;
+            });
+
+            it("should be a function", function () {
+                expect(promise.catch).to.be.a.function;
+            });
+
+            it("should one two arguments", function () {
+                expect(promise.catch.length).to.equal(1);
+            });
+        });
+
+        describe("error handling", function () {
+            it("should fail without arguments", function () {
+                expect(function () {new Promise(function () {}).catch(); }).to.throw(TypeError, /Not enough arguments!/);
+            });
+
+            it("should fail, if called with anything else then a function", function () {
+                var promise = Promise.reject(new Error("foobar"));
+
+                expect(function () {promise.catch({}); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new Object()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch([]); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new Array()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(""); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new String("")); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(0); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new Number(0)); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(true); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new Boolean(true)); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(/regExp/); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new RegExp()); }).to.throw(TypeError, /Not a function!/);
+                expect(function () {promise.catch(new Date()); }).to.throw(TypeError, /Not a function!/);
+            });
+        });
+
+        describe("rejected callback argument", function () {
+            it("should register and call the given rejected callback with the given reason", function () {
+                var object = {},
+                    array = [],
+                    string = "",
+                    number = 0,
+                    boolean = true,
+                    regExp = /regExp/,
+                    date = new Date(),
+                    error = new Error();
+
+                Promise.reject(object).catch(function (reason) {expect(reason).to.equal(object); });
+                Promise.reject(array).catch(function (reason) {expect(reason).to.equal(array); });
+                Promise.reject(string).catch(function (reason) {expect(reason).to.equal(string); });
+                Promise.reject(number).catch(function (reason) {expect(reason).to.equal(number); });
+                Promise.reject(boolean).catch(function (reason) {expect(reason).to.equal(boolean); });
+                Promise.reject(regExp).catch(function (reason) {expect(reason).to.equal(regExp); });
+                Promise.reject(date).catch(function (reason) {expect(reason).to.equal(date); });
+                Promise.reject(error).catch(function (reason) {expect(reason).to.equal(error); });
+            });
+
+            it("should register and call the given rejected callback with only one argument", function () {
+                var rejectedCalled = false;
+
+                Promise.reject("foo", "bar").catch(function (reason) {
+                    rejectedCalled = true;
+                    expect(arguments.length).to.equal(1);
+                    expect(reason).to.equal("foo");
+                });
             });
         });
     });
