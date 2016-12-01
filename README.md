@@ -3,6 +3,7 @@ ES5Promise
 ==========
 [![Build Status](https://travis-ci.org/avne/ES5Promise.svg?branch=master)](http://travis-ci.org/avne/ES5Promise)
 [![Coverage Status](https://coveralls.io/repos/avne/ES5Promise/badge.svg?branch=master&service=github)](https://coveralls.io/github/avne/ES5Promise?branch=master)
+
 ECMAScript 5 compatible polyfill for the ECMAScript 2015 (Harmony) promise pattern.
 
 Installation
